@@ -27,3 +27,17 @@ export const request = params => {
         resolve(data)
     })
 }
+//节流函数
+export const createThrottle = (delay)=>{
+    let status = 'start'
+    return function throttle(fn){
+        if(status === 'wating'){
+            return
+        }
+        status = 'wating'
+        setTimeout(() => {
+            fn && fn()
+            status = 'start'
+        },delay)
+    }
+}

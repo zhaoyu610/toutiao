@@ -1,8 +1,9 @@
-import {request} from './util.js'
+import {request,createThrottle} from './util.js'
 import components from './items'
 class Manager{
     constructor($container){
         this.$container = $container
+        this.throttle = createThrottle(1000)
     }
     init(){
         
@@ -32,7 +33,8 @@ class Manager{
             let top = offestHeight - sceenHeight - scrollY
             if( top< 50){
                 // cb && cb()
-                cb()
+                //节流函数
+                this.throttle(cb)
             }
 
         }
